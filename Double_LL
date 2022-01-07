@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *prev;
+    struct node *next;
+}*newnode,*temp;
+struct node *head=NULL;
+struct node *tail=NULL;
+ void create(int n){
+     int value,i=0,ch;
+     for(i=0;i<n;i++){
+     newnode=(struct node*)malloc(sizeof(struct node));
+     printf("enter the value :");
+     scanf("%d",&value);
+     newnode->data=value;
+     newnode->prev=NULL;
+     newnode->next=NULL;
+     if(head==NULL){
+         head=newnode;
+         tail=newnode;
+     }
+     else{
+        tail->next=newnode;
+        newnode->prev=tail;
+        tail=newnode;
+     }
+     
+     }
+ 
+}
+ void display(){
+     temp=head;
+     while(temp!=NULL){
+     printf("the values are :%d\n",temp->data);
+     
+         temp=temp->next;
+     }
+ }
+ void insert_beg(){
+     int value;
+     printf("enter the vaule to inset at beginning");
+     scanf("%d",&value);
+     newnode=(struct node*)malloc(sizeof(struct node));
+     newnode->data=value;
+     newnode->prev=NULL;
+     newnode->next=head;
+     head->prev=newnode;
+     head=newnode;
+     display();
+ }
+ void insert_pos(){
+     int value,pos;
+     printf("enter the position to insert a value");
+     scanf("%d",&pos);
+     printf("enter the vlue to insert");
+     scanf("%d",&value);
+    newnode=(struct node*)malloc(sizeof(struct node));
+    temp=head;
+    for(int i=1;i<pos-1;i++){
+        temp=temp->next;
+    }
+    newnode->data=value;
+    newnode->next=temp->next;
+    newnode->prev=temp;
+    temp->next->prev=newnode;
+    temp->next=newnode;
+    display();
+ }
+ void delete_beg(){
+     temp=head;
+     head=head->next;
+     head->prev=NULL;
+     temp->next=NULL;
+     display();
+ }
+ void delete_pos(){
+     int pos;
+     temp=head;
+     printf("enter the position to delete");
+     scanf("%d",&pos);
+     for(int i=1;i<pos-1;i++){
+         temp=temp->next;
+     }
+     temp->next->next->prev=temp;
+     temp->next=temp->next->next;
+     display();
+     
+     
+ }
+ int main(){
+     int n;
+     printf("enter the no.of nodes");
+     scanf("%d",&n);
+     create(n);
+     display();
+     insert_beg();
+    insert_pos();
+    delete_beg();
+    delete_pos();
+    
+    
+ }
+        
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+     
+     
+     
+ 
