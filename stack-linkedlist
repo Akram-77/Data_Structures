@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* next;
+}*temp,*newnode;
+struct node *head;
+void push(){
+    int val;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    if(newnode==NULL){
+        printf("unable to push the element the element");
+    }
+    else{
+        printf("enter the value");
+        scanf("%d",&val);
+        
+        if(head==NULL){
+            newnode->data=val;
+            newnode->next=NULL;
+            head=newnode;
+        }
+        else{
+            newnode->data=val;
+            newnode->next=head;
+            head=newnode;
+    
+        }
+         printf("Item pushed");  
+        
+    }
+}
+void pop(){
+    int item;
+    struct node* ptr;
+    if(head==NULL){
+        printf("under flow occurs");
+    }
+    else{
+        item=head->data;
+        ptr=head;
+        free(ptr);
+        head=head->next;
+        printf("item popped");
+        
+    }
+}
+void display(){
+    temp=head;
+    if(temp==NULL){
+        printf("the strack is empty");
+    }
+    else{
+        printf("the elements in the stack are\n");
+        while(temp!=NULL){
+            printf("%d\n",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+void main(){
+    int ch=0;
+    while(ch!=4){
+        printf("chooose the operation");
+        printf("1.push 2.pop 3.display 4.exit\t");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+                    push();
+                    break;
+            case 2:
+                    pop();
+                    break;
+            case 3:
+                    display();
+                    break;
+            case 4:
+                    break;
+        }
+        
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
