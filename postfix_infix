@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#include<math.h>
+#include<string.h>
+#define max 50
+int stack[max],top=-1;
+void push(int item){
+    top=top+1;
+    stack[top]=item;
+}
+int pop(){
+    return stack[top--];
+}
+int operation(int op1,int op2,char c){
+    switch(c){
+        case '+' :
+            return (op1+op2);
+        case '-':
+                        return(op1-op2);
+        case '*':
+                        return (op1*op2);
+        case '/':
+                        return (op1/op2);
+        case '%':
+                        return (op1%op2);
+        case '^':
+                        return pow(op1,op2);
+    }
+}
+void main(){
+    int op1,op2,i=0,result=0;
+    char postfix[max],c;
+    printf("enter the postfix expression : ");
+    scanf("%s",postfix);
+    while(i<strlen(postfix)){
+        c=postfix[i];
+        if(isdigit(c)){
+            push(c-'0');
+        }
+        else{
+            op2=pop();
+            op1=pop();
+           // printf("%d%d",op1,op2);
+            result=operation(op1,op2,c);
+            push(result);
+        }
+        i++;
+    }
+    printf("the result of expression is : %d",stack[top]);
+}
